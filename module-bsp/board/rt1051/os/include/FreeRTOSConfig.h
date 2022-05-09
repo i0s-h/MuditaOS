@@ -51,7 +51,7 @@ extern "C"
 #endif
 
 #define configUSE_PREEMPTION                    1
-#define configUSE_TICKLESS_IDLE                 0
+#define configUSE_TICKLESS_IDLE                 1
 #define configCPU_CLOCK_HZ                      (SystemCoreClock)
 #define configTICK_RATE_HZ                      ((TickType_t)1000)
 #define configMAX_PRIORITIES                    5
@@ -156,8 +156,8 @@ standard names. */
 #define xPortSysTickHandler SysTick_Handler
 
 /* if this is 0 then tickless idle will not fire */
-#define configPRE_SLEEP_PROCESSING  vPortPRE_SLEEP_PROCESSING
-#define configPOST_SLEEP_PROCESSING vPortPOST_SLEEP_PROCESSING
+//#define configPRE_SLEEP_PROCESSING  vPortPRE_SLEEP_PROCESSING
+//#define configPOST_SLEEP_PROCESSING vPortPOST_SLEEP_PROCESSING
 //#define configEXPECTED_IDLE_TIME_BEFORE_SLEEP 100
 
 #define configSYSTICK_CLOCK_HZ (100000U)

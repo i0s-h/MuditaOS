@@ -13,6 +13,7 @@
 
 #if configUSE_TICKLESS_IDLE == 1
 #include "fsl_gpt.h"
+#include "fsl_gpc.h"
 #else
 #include "fsl_common.h"
 #endif
@@ -99,14 +100,13 @@ void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTime)
     GPT_Type *pxGptBase;
 
     pxGptBase = vPortGetGptBase();
-    if (pxGptBase == 0)
-        return;
     /* Make sure the SysTick reload value does not overflow the counter. */
     if (xExpectedIdleTime > xMaximumPossibleSuppressedTicks) {
         xExpectedIdleTime = xMaximumPossibleSuppressedTicks;
     }
-    if (xExpectedIdleTime == 0)
+    if (xExpectedIdleTime == 0) {
         return;
+    }
 
     /* Calculate the reload value required to wait xExpectedIdleTime
     tick periods.  -1 is used because this code will execute part way
@@ -248,7 +248,7 @@ void vPortStopTimerInterrupt(void)
     NVIC_DisableIRQ(vPortGetGptIrqn());
     NVIC_ClearPendingIRQ(vPortGetGptIrqn());
     GPC_DisableIRQ(GPC, vPortGetGptIrqn());
-    GPC_Deinit(vPortGetGptBase());
+    GPT_Deinit(vPortGetGptBase());
 #endif
     portNVIC_SYSTICK_CTRL_REG = 0;
     NVIC_DisableIRQ(SysTick_IRQn);
