@@ -749,6 +749,7 @@ namespace app::manager
         app.startupReason = StartupReason::Launch;
 
         if (!actionsRegistry.hasPendingAction()) {
+            actionsRegistry.process();
             return;
         }
 
@@ -764,8 +765,6 @@ namespace app::manager
             actionsRegistry.finished();
             break;
         default: {
-            auto &params = action->params;
-            app::ApplicationCommon::requestAction(this, app.name(), action->actionId, std::move(params));
             break;
         }
         }
