@@ -95,6 +95,7 @@ void GPT1_IRQHandler(void)
 
 void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTime)
 {
+#if 1
     uint32_t ulReloadValue, ulCompleteTickPeriods;
     TickType_t xModifiableIdleTime;
     GPT_Type *pxGptBase;
@@ -201,6 +202,7 @@ void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTime)
         }
         portEXIT_CRITICAL();
     }
+#endif
 }
 #endif /* #if configUSE_TICKLESS_IDLE */
 

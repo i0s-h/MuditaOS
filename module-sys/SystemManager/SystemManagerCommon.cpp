@@ -257,7 +257,7 @@ namespace sys
 
         freqTimer = sys::TimerFactory::createPeriodicTimer(
             this, "cpuTick", constants::timerInitInterval, [this](sys::Timer &) { FreqUpdateTick(); });
-        freqTimer.start();
+        //freqTimer.start();
 
         powerManagerEfficiencyTimer = sys::TimerFactory::createPeriodicTimer(
             this, "logPowerManagerEfficiency", constants::powerManagerLogsTimerInterval, [this](sys::Timer &) {
@@ -635,14 +635,14 @@ namespace sys
             return std::make_shared<sys::ResponseMessage>();
         });
 
-        connect(typeid(sys::HoldCpuFrequencyMessage), [this](sys::Message *message) -> sys::MessagePointer {
-            auto msg = static_cast<sys::HoldCpuFrequencyMessage *>(message);
-            powerManager->SetCpuFrequencyRequest(msg->getName(), msg->getRequest());
-            if (msg->getHandle() != nullptr) {
-                xTaskNotifyGive(msg->getHandle());
-            }
-            return sys::MessageNone{};
-        });
+//        connect(typeid(sys::HoldCpuFrequencyMessage), [this](sys::Message *message) -> sys::MessagePointer {
+//            auto msg = static_cast<sys::HoldCpuFrequencyMessage *>(message);
+//            powerManager->SetCpuFrequencyRequest(msg->getName(), msg->getRequest());
+//            if (msg->getHandle() != nullptr) {
+//                xTaskNotifyGive(msg->getHandle());
+//            }
+//            return sys::MessageNone{};
+//        });
 
         connect(typeid(sys::ReleaseCpuFrequencyMessage), [this](sys::Message *message) -> sys::MessagePointer {
             auto msg = static_cast<sys::ReleaseCpuFrequencyMessage *>(message);

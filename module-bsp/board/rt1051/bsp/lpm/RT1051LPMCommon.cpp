@@ -102,6 +102,7 @@ namespace bsp
 
     void RT1051LPMCommon::SetCpuFrequency(bsp::CpuFrequencyMHz freq)
     {
+#if 0
         if (currentFrequency == freq) {
             return;
         }
@@ -138,6 +139,7 @@ namespace bsp
         }
         LOG_INFO("CPU frequency changed to %lu", CLOCK_GetFreq(kCLOCK_CpuClk));
         currentFrequency = freq;
+#endif
     }
 
     void RT1051LPMCommon::SetHighestCoreVoltage()
